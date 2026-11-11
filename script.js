@@ -28,4 +28,24 @@ document.addEventListener("DOMContentLoaded", () => {
         "Thank you! Your enquiry form is ready. Submission will be connected later.";
     });
   }
+
+  // Play each product video while the pointer is over its image area.
+  document.querySelectorAll(".product-image video").forEach((video) => {
+    const productImage = video.closest(".product-image");
+
+    if (!productImage) {
+      return;
+    }
+
+    productImage.addEventListener("pointerenter", () => {
+      video.play().catch((error) => {
+        console.warn("Product video could not start on pointer enter.", error);
+      });
+    });
+
+    productImage.addEventListener("pointerleave", () => {
+      video.pause();
+      video.currentTime = 0;
+    });
+  });
 });

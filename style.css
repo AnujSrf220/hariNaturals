@@ -95,8 +95,14 @@ select {
   gap: 30px;
 }
 
+.brand {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
 .brand img {
-  width: 205px;
+  width: 240px;
   height: auto;
   mix-blend-mode: multiply;
 }
@@ -216,13 +222,14 @@ select {
 
 .hero-logo-card {
   position: relative;
-  min-height: 430px;
-  display: grid;
-  place-items: center;
-  align-content: center;
-  padding: 40px;
+  aspect-ratio: 941 / 1226;
+  min-height: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 40px 30px 32px;
   overflow: hidden;
-  background: rgba(255,255,255,0.76);
+  background: #e8ad4c;
   border: 1px solid rgba(47,96,48,0.12);
   border-radius: 34px;
   box-shadow: var(--shadow);
@@ -234,30 +241,36 @@ select {
   inset: 15px;
   border: 1px solid rgba(178,149,92,0.32);
   border-radius: 26px;
+  z-index: 2;
+  pointer-events: none;
 }
 
 .hero-logo-card img {
-  position: relative;
-  width: min(380px, 90%);
-  mix-blend-mode: multiply;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  object-fit: fill;
 }
 
 .hero-logo-card p {
   position: relative;
+  z-index: 3;
   max-width: 330px;
-  margin-top: 15px;
-  color: var(--muted);
+  margin: 0;
+  padding: 10px 16px;
+  color: var(--white);
+  background: rgba(47, 96, 48, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
   text-align: center;
   font-size: 0.9rem;
 }
 
 .leaf-glow {
-  position: absolute;
-  width: 280px;
-  height: 280px;
-  border-radius: 50%;
-  background: rgba(143,176,68,0.15);
-  filter: blur(4px);
+  display: none;
 }
 
 /* ==================== SECTIONS ==================== */
@@ -329,8 +342,9 @@ select {
 .product-image video {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   display: block;
+  border-radius: 12px;
 }
 
 .product-moong { background: #edf4df; }
@@ -386,6 +400,24 @@ select {
 .product-bottom span {
   color: var(--muted);
   font-size: 0.7rem;
+}
+
+.available-sizes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px;
+  line-height: 1.5;
+}
+
+.available-sizes strong {
+  padding: 3px 7px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--green-900);
+  background: var(--white);
+  font-size: 0.7rem;
+  font-weight: 800;
 }
 
 /* ==================== ABOUT ==================== */
@@ -489,6 +521,80 @@ select {
 .benefit-card p {
   color: var(--muted);
   font-size: 0.9rem;
+}
+
+/* ==================== CERTIFICATIONS ==================== */
+
+.credentials-section {
+  background: var(--sand);
+}
+
+.credentials-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.credential-card {
+  padding: 24px 18px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: var(--white);
+  box-shadow: 0 12px 26px rgba(47, 96, 48, 0.04);
+}
+
+.credential-card span {
+  display: block;
+  color: var(--gold-600);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.credential-card strong {
+  display: block;
+  margin-top: 10px;
+  color: var(--green-900);
+  font-size: 0.96rem;
+  line-height: 1.5;
+}
+
+/* ==================== EXPORT BANNER ==================== */
+
+.export-banner-section {
+  background: linear-gradient(135deg, #f3f9ef, #eaf5f8);
+}
+
+.export-banner {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 24px;
+  align-items: center;
+  padding: 32px 30px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.52);
+  box-shadow: 0 16px 38px rgba(47, 96, 48, 0.06);
+}
+
+.export-banner h2 {
+  color: var(--green-900);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+}
+
+.export-meta {
+  display: grid;
+  gap: 18px;
+  justify-items: end;
+}
+
+.export-meta p {
+  color: var(--muted);
+  text-align: right;
 }
 
 /* ==================== CONTACT / FORM ==================== */
@@ -637,20 +743,31 @@ select:focus {
 @media (max-width: 980px) {
   .hero-grid,
   .about-grid,
-  .contact-grid {
+  .contact-grid,
+  .export-banner {
     grid-template-columns: 1fr;
   }
 
   .hero-logo-card {
-    min-height: 350px;
+    aspect-ratio: 941 / 1226;
+    min-height: 0;
   }
 
   .product-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .benefit-grid {
+  .benefit-grid,
+  .credentials-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .export-meta {
+    justify-items: start;
+  }
+
+  .export-meta p {
+    text-align: left;
   }
 }
 
@@ -664,7 +781,11 @@ select:focus {
   }
 
   .brand img {
-    width: 160px;
+    width: 180px;
+  }
+
+  .brand {
+    order: 0;
   }
 
   .main-nav {
@@ -686,6 +807,7 @@ select:focus {
   .product-grid,
   .benefit-grid,
   .about-stats,
+  .credentials-grid,
   .form-row {
     grid-template-columns: 1fr;
   }
@@ -702,4 +824,11 @@ select:focus {
     align-items: flex-start;
     flex-direction: column;
   }
+}
+
+/* Header should scroll with page */
+.site-header {
+    position: static !important;
+    top: auto !important;
+    z-index: auto;
 }
